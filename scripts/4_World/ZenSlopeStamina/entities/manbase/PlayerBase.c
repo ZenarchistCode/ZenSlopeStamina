@@ -1,6 +1,8 @@
 modded class PlayerBase 
 {
 #ifdef SERVER
+	static bool ZEN_SLOPE_ENABLED = true;
+
 	protected bool m_ZenIsSlopeDepletionActive;
 	
 	override void OnScheduledTick(float deltaTime)
@@ -23,6 +25,9 @@ modded class PlayerBase
 
 	void CheckZenSlopeStaminaDeletionModifier()
 	{
+		if (!ZEN_SLOPE_ENABLED)
+			return;
+			
 		if (m_MovementState.m_iMovement == DayZPlayerConstants.MOVEMENTIDX_IDLE)
 		{
 			DeactivateZenSlopeModifier();
