@@ -5,6 +5,8 @@ modded class MissionServer
 	{
 		super.OnInit();
 
+        GetZenSlopeStaminaConfig();
+
         #ifdef ZenModPack
         PlayerBase.ZEN_SLOPE_ENABLED = ZenModEnabled("ZenStaminaSlope");
         #endif
