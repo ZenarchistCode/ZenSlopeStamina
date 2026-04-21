@@ -8,7 +8,7 @@ class ZenSlopeStaminaConfig
 
 	void Load()
 	{
-		if (!GetGame().IsDedicatedServer())
+		if (!g_Game.IsDedicatedServer())
 			return;
 
 		if (FileExist(zenModFolder + zenConfigName))

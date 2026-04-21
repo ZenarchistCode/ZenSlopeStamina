@@ -9,7 +9,7 @@ modded class PlayerBase
 	{
 		super.OnScheduledTick(deltaTime);
 
-		CheckZenSlopeStaminaDeletionModifier();
+		CheckZenSlopeStaminaDepletionModifier();
 	}
 	
 	static float ZenSlopeGetHeightDifferenceAhead(PlayerBase player, float distance = 1.0) 
@@ -17,18 +17,18 @@ modded class PlayerBase
         vector pos 			= player.GetPosition();
         vector dir 			= player.GetDirection();
         vector aheadPos 	= pos + (dir * distance);
-        float currentY 		= GetGame().SurfaceY(pos[0], pos[2]);
-        float aheadY 		= GetGame().SurfaceY(aheadPos[0], aheadPos[2]);
+        float currentY 		= g_Game.SurfaceY(pos[0], pos[2]);
+        float aheadY 		= g_Game.SurfaceY(aheadPos[0], aheadPos[2]);
         
         return aheadY - currentY;
     }
 
-	void CheckZenSlopeStaminaDeletionModifier()
+	void CheckZenSlopeStaminaDepletionModifier()
 	{
 		if (!ZEN_SLOPE_ENABLED)
 			return;
 			
-		if (m_MovementState.m_iMovement == DayZPlayerConstants.MOVEMENTIDX_IDLE)
+		if (m_MovementState.m_iMovement == DayZPlayerConstants.MOVEMENTIDX_IDLE || IsSwimming() || IsClimbing())
 		{
 			DeactivateZenSlopeModifier();
 			return;
